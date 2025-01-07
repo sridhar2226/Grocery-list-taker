@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Grocery List</title>
+</head>
+
+<body>
+    <div class="heading-sec">grocery list</div>
+    <div class="container">
+        <div class="grocery-list">
+            <div class="itm-name">
+                <label>Item Name</label>
+                <input type="text" id="ItemName" required>
+            </div>
+            <div class="qty-cont">
+                <div class="itm-qty">
+                    <label>Quantity</label>
+                    <input type="number" min="0" class="no-spinner" id="qty" required>
+                </div>
+                <div class="itm-unit">
+                    <label>Unit</label>
+                    <input type="text" id="unit" required>
+                </div>
+            </div>
+            <div class="purchase-date">
+                <label>Date</label>
+                <input type="date" id="date">
+            </div>
+            <div class="buttons">
+                <button class="reset" id="reset">Reset</button>
+                <button class="submit" id="submit">Submit</button>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>ITEM NAME</th>
+                        <th>QUANTITY</th>
+                        <th>PURCHASING DATE</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>

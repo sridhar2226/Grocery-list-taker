@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading-sec {
+  text-transform: uppercase;
+  font-size: 26px;
+  font-weight: 600;
+  padding: 28px 50px;
+  background-color: #72a0c1;
+  color: white;
+}
+.grocery-list {
+  width: 40%;
+  margin: 20px 25px 10px;
+  padding: 13px 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 18px;
+}
+
+/* Input feild styling */
+
+input {
+  padding: 8px 12px;
+  min-width: 50%;
+  outline: none;
+  border-radius: 6px;
+  border: 1px solid #d3d3d3;
+  text-transform: capitalize;
+}
+
+.itm-qty input {
+  width: 90%;
+}
+
+/* Styling for removing toggler in number feild */
+input[type="number"].no-spinner {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="number"].no-spinner::-webkit-inner-spin-button,
+input[type="number"].no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.itm-name,
+.itm-qty,
+.purchase-date {
+  margin-bottom: 12px;
+}
+
+/* table styling */
+
+.table-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #6699cc;
+  color: white;
+}
+
+thead th {
+  padding: 15px;
+  text-align: left;
+  font-size: 16px;
+}
+
+tbody tr {
+  text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+tbody td {
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+/* button stylings */
+
+.submit {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #4b9cd3;
+  border: 1px solid #4b9cd3;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.reset {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #17b169;
+  border: 1px solid #17b169;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.buttons {
+  margin-top: 15px;
+}
+
+.qty-cont {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.itm-qty {
+  width: 100%;
+}
+
+.itm-unit {
+  width: 100%;
+}
+
+/* Hover Stylings */
+
+input:focus {
+  border: 1px solid #b1b1af;
+}
+
+tbody tr:hover {
+  background-color: #d7ebff;
+}
+
+.submit:hover {
+  background-color: #2a52be;
+  border: 1px solid #2a52be;
+}
+
+.reset:hover {
+  background-color: #018749;
+  border: 1px solid #018749;
+}
