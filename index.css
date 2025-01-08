@@ -80,7 +80,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   overflow-y: auto;
-  max-height: 30vh;
 }
 
 thead {
@@ -176,4 +175,40 @@ tbody tr:hover {
 .reset:hover {
   background-color: #018749;
   border: 1px solid #018749;
+}
+
+@media only screen and (max-width: 1180px) {
+  .container {
+    display: block;
+    width: -webkit-fill-available;
+  }
+  .grocery-list {
+    width: -webkit-fill-available;
+  }
+  .table-container {
+    width: -webkit-fill-available;
+    margin: 20px 25px 10px;
+  }
+  .heading-sec {
+    padding: 28px 25px;
+  }
+  body{
+    padding-bottom: 30px;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .qty-cont {
+    display: block;
+  }
+  input {
+    width: 90%;
+  }
+  .itm-unit {
+    margin-bottom: 12px;
+  }
+  table {
+    overflow: auto;
+    width: -webkit-fill-available;
+    display: block;
+  }
 }
