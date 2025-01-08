@@ -1,13 +1,12 @@
 const tableBody = document.querySelector("#data-table tbody");
 
 function updateTableMessage() {
-  // Check if the table has any rows (excluding the header row)
   if (tableBody.rows.length === 0) {
-    // Create a message row
     const newMessageRow = document.createElement("tr");
     const newMessageCell = document.createElement("td");
-    newMessageCell.colSpan = 3; // Set the colspan to match the number of columns in the table
+    newMessageCell.colSpan = 5;
     newMessageCell.textContent = "Add Grocery List";
+    newMessageCell.style.textAlign = "center";
     newMessageRow.appendChild(newMessageCell);
 
     // Only append the message if it's not already in the table
@@ -26,6 +25,7 @@ function updateTableMessage() {
 function newGroceryList() {
   let itmName = document.getElementById("ItemName").value.trim();
   let qty = document.getElementById("qty").value.trim();
+  let qtyUnit = document.getElementById("unit").value.trim();
   let buyDate = document.getElementById("date").value.trim();
 
   // Validate mandatory fields
@@ -45,17 +45,44 @@ function newGroceryList() {
     );
     document.getElementById("ItemName").value = "";
     document.getElementById("qty").value = "";
+    document.getElementById("unit").value = "";
     document.getElementById("date").value = "";
     return;
   }
 
   // Create a new row and append cells
   const newRow = document.createElement("tr");
-  [itmName, qty, buyDate].forEach((value) => {
+  [itmName, qty, qtyUnit, buyDate].forEach((value) => {
     const cell = document.createElement("td");
     cell.textContent = value;
     newRow.appendChild(cell);
   });
+
+  // Status button
+
+  const buttonCell = document.createElement("td");
+  const statusBtn = document.createElement("button");
+  statusBtn.textContent = "Yet to buy";
+  statusBtn.className = "status-btn";
+  statusBtn.style.backgroundColor = "#FCF55F";
+  statusBtn.style.border = "1px solid #FCF55F";
+  statusBtn.addEventListener("click", () => {
+    statusBtn.textContent =
+      statusBtn.textContent === "Yet to buy" ? "Purchased" : "Yet to buy";
+  });
+  statusBtn.addEventListener("click", () => {
+    if (statusBtn.textContent === "Purchased") {
+      statusBtn.style.backgroundColor = "#018749";
+      statusBtn.style.color = "white";
+      statusBtn.style.border = "1px solid #018749";
+    } else {
+      statusBtn.style.backgroundColor = "#FCF55F";
+      statusBtn.style.color = "black";
+      statusBtn.style.border = "1px solid #FCF55F";
+    }
+  });
+  buttonCell.appendChild(statusBtn);
+  newRow.appendChild(buttonCell);
 
   if (purchaseDate.toDateString() === currentDate.toDateString()) {
     newRow.style.color = "red";
@@ -69,6 +96,7 @@ function newGroceryList() {
   // Clear the input fields after appending
   document.getElementById("ItemName").value = "";
   document.getElementById("qty").value = "";
+  document.getElementById("unit").value = "";
   document.getElementById("date").value = "";
 
   // Update table message visibility after adding a row
@@ -79,7 +107,10 @@ function resetList() {
   // Clear all input fields
   document.getElementById("ItemName").value = "";
   document.getElementById("qty").value = "";
+  document.getElementById("unit").value = "";
   document.getElementById("date").value = "";
+
+  clearStoredData();
 
   // Update table message visibility after resetting the list
   updateTableMessage();
@@ -95,17 +126,89 @@ function storeData() {
   localStorage.setItem("groceryData", JSON.stringify(rows));
 }
 
+// Load existing data
+
 function loadData() {
   const storedData = localStorage.getItem("groceryData");
   if (storedData) {
     const rows = JSON.parse(storedData);
     rows.forEach((rowData) => {
       const newRow = document.createElement("tr");
-      rowData.forEach((data) => {
+
+      rowData.forEach((data, index) => {
         const cell = document.createElement("td");
-        cell.textContent = data;
+
+        // Check if it's the purchase date column (assumed to be the 4th column)
+        if (index === 3) {
+          const currentDate = new Date();
+          currentDate.setHours(0, 0, 0, 0);
+          const purchaseDate = new Date(data);
+
+          if (purchaseDate.toDateString() === currentDate.toDateString()) {
+            newRow.style.color = "red"; // Highlight the row if purchase date is today
+          }
+        }
+
+        // Check if it's the status column (last column)
+        if (
+          index === rowData.length - 1 &&
+          (data === "Yet to buy" || data === "Purchased")
+        ) {
+          const statusBtn = document.createElement("button");
+          statusBtn.textContent = data;
+          statusBtn.className = "status-btn";
+
+          // Set initial button styles
+          if (data === "Purchased") {
+            statusBtn.style.backgroundColor = "#018749";
+            statusBtn.style.color = "white";
+            statusBtn.style.border = "1px solid #018749";
+            newRow.style.color = "black"; // Reset row color if purchased
+          } else {
+            statusBtn.style.backgroundColor = "#FCF55F";
+            statusBtn.style.color = "black";
+            statusBtn.style.border = "1px solid #FCF55F";
+          }
+
+          // Add event listener for toggling status
+          statusBtn.addEventListener("click", () => {
+            statusBtn.textContent =
+              statusBtn.textContent === "Yet to buy"
+                ? "Purchased"
+                : "Yet to buy";
+
+            if (statusBtn.textContent === "Purchased") {
+              statusBtn.style.backgroundColor = "#018749";
+              statusBtn.style.color = "white";
+              statusBtn.style.border = "1px solid #018749";
+              newRow.style.color = "black"; // Reset row color
+            } else {
+              statusBtn.style.backgroundColor = "#FCF55F";
+              statusBtn.style.color = "black";
+              statusBtn.style.border = "1px solid #FCF55F";
+              const purchaseDate = new Date(rowData[3]);
+              const currentDate = new Date();
+              currentDate.setHours(0, 0, 0, 0);
+
+              // Reapply red color if the date matches today
+              if (purchaseDate.toDateString() === currentDate.toDateString()) {
+                newRow.style.color = "red";
+              }
+            }
+
+            // Update localStorage when button is toggled
+            storeData();
+          });
+
+          cell.appendChild(statusBtn);
+        } else {
+          // For other cells, just add plain text
+          cell.textContent = data;
+        }
+
         newRow.appendChild(cell);
       });
+
       tableBody.appendChild(newRow);
     });
   }
@@ -114,6 +217,10 @@ function loadData() {
 
 // Update the table message when the page loads (in case there are no items initially)
 loadData();
+
+function resetTableData() {
+  localStorage.removeItem("groceryData");
+}
 
 document.getElementById("submit").addEventListener("click", function (event) {
   event.preventDefault(); // Prevent the default form submission behavior
@@ -126,3 +233,10 @@ document.getElementById("reset").addEventListener("click", function (event) {
   tableBody.innerHTML = ""; // Clear the table body
   updateTableMessage(); // Update the message
 });
+document.getElementById("reset").addEventListener("click", function (event) {
+  event.preventDefault(); // Prevent any default action
+  localStorage.removeItem("groceryData"); // Clear the stored data
+  tableBody.innerHTML = ""; // Clear the table body
+  updateTableMessage(); // Update the message
+});
+
