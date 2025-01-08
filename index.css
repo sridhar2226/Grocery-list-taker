@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  box-sizing: 0;
+  box-sizing: border-box;
 }
 
 .container {
@@ -18,7 +18,7 @@ body {
   color: white;
 }
 .grocery-list {
-  width: 40%;
+  width: 100%;
   margin: 20px 25px 10px;
   padding: 13px 25px;
   background-color: #ffffff;
@@ -70,7 +70,6 @@ input[type="number"].no-spinner::-webkit-outer-spin-button {
 
 .table-container {
   width: 100%;
-  max-width: 600px;
   margin: 20px 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
@@ -80,6 +79,8 @@ input[type="number"].no-spinner::-webkit-outer-spin-button {
 table {
   width: 100%;
   border-collapse: collapse;
+  overflow-y: auto;
+  max-height: 30vh;
 }
 
 thead {
@@ -106,7 +107,7 @@ tbody tr:nth-child(odd) {
 }
 
 tbody td {
-  padding: 10px;
+  padding: 10px 15px;
   text-align: left;
   font-size: 14px;
   border-bottom: 1px solid #ddd;
@@ -135,6 +136,12 @@ tbody td {
 
 .buttons {
   margin-top: 15px;
+}
+
+.status-btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .qty-cont {
