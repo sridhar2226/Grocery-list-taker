@@ -7,6 +7,8 @@ function updateTableMessage() {
     newMessageCell.colSpan = 5;
     newMessageCell.textContent = "Add Grocery List";
     newMessageCell.style.textAlign = "center";
+    newMessageCell.style.fontSize = "24px";
+    newMessageCell.style.fontWeight = "600";
     newMessageRow.appendChild(newMessageCell);
 
     // Only append the message if it's not already in the table
@@ -205,7 +207,6 @@ function loadData() {
           // For other cells, just add plain text
           cell.textContent = data;
         }
-
         newRow.appendChild(cell);
       });
 
@@ -239,4 +240,3 @@ document.getElementById("reset").addEventListener("click", function (event) {
   tableBody.innerHTML = ""; // Clear the table body
   updateTableMessage(); // Update the message
 });
-
