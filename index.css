@@ -2,6 +2,10 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-image: url("pexels-padrinan-19670.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: -webkit-fill-available;
 }
 
 .container {
@@ -13,17 +17,27 @@ body {
   text-transform: uppercase;
   font-size: 26px;
   font-weight: 600;
-  padding: 28px 50px;
-  background-color: #72a0c1;
+  padding: 28px 30px;
+  background-color: rgba(17, 25, 40, 0.51);
   color: white;
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  background-blend-mode: color-burn;
 }
+
 .grocery-list {
   width: 100%;
   margin: 20px 25px 10px;
+  color: white;
   padding: 13px 25px;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(0px) saturate(144%);
+  -webkit-backdrop-filter: blur(0px) saturate(144%);
+  background-color: rgba(17, 25, 40, 0.51);
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 label {
@@ -41,6 +55,7 @@ input {
   border-radius: 6px;
   border: 1px solid #d3d3d3;
   text-transform: capitalize;
+  background-color: #faf9f6 !important;
 }
 
 .itm-qty input {
@@ -48,6 +63,7 @@ input {
 }
 
 /* Styling for removing toggler in number feild */
+
 input[type="number"].no-spinner {
   -moz-appearance: textfield;
   -webkit-appearance: none;
@@ -74,16 +90,23 @@ input[type="number"].no-spinner::-webkit-outer-spin-button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   overflow: hidden;
+  backdrop-filter: blur(0px) saturate(144%);
+  -webkit-backdrop-filter: blur(0px) saturate(144%);
+  background-color: rgba(17, 25, 40, 0.51);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  color: white;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   overflow-y: auto;
+  height: 100%;
+  color: white;
 }
 
 thead {
-  background-color: #6699cc;
   color: white;
 }
 
@@ -95,22 +118,16 @@ thead th {
 
 tbody tr {
   text-transform: capitalize;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: #ffffff;
+  color: #ffffff;
 }
 
 tbody td {
   padding: 10px 15px;
   text-align: left;
   font-size: 14px;
-  border-bottom: 1px solid #ddd;
+  color: white;
 }
+
 /* button stylings */
 
 .submit {
@@ -164,7 +181,7 @@ input:focus {
 }
 
 tbody tr:hover {
-  background-color: #d7ebff;
+  background-color: #353935;
 }
 
 .submit:hover {
@@ -176,6 +193,8 @@ tbody tr:hover {
   background-color: #018749;
   border: 1px solid #018749;
 }
+
+/* Responsive styling */
 
 @media only screen and (max-width: 1180px) {
   .container {
@@ -192,8 +211,9 @@ tbody tr:hover {
   .heading-sec {
     padding: 28px 25px;
   }
-  body{
+  body {
     padding-bottom: 30px;
+    background-size: auto;
   }
 }
 @media only screen and (max-width: 420px) {
